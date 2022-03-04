@@ -173,12 +173,25 @@
 <div class="container py-4">
 
   <!-- Bootstrap 5 starter form -->
-  <form id="contactForm">
+  <form id="contactForm" name="google-sheet">
+    <div id="form-alert"></div>
 
     <!-- Name input -->
-    <div class="col-mb-6">
+    <div class="col-6 mb-2 " style="float: left; ">
       <label class="form-label" for="name">Name</label>
-      <input class="form-control" id="name" type="text" placeholder="Name" />
+      <input class="form-control" id="name" name="name" type="text" placeholder="Name" />
+    </div>
+
+     <!-- Place -->
+    <div class="col-6" style="float: left;  padding-left: 2%;">
+      <label class="form-label" for="name">Place</label>
+      <input class="form-control" id="place" name="place" type="text" placeholder="Place" />
+    </div>
+
+     <!-- Number-->
+     <div class="col-12 mb-2" style="float: left;">
+      <label class="form-label" for="name">Mobile Number</label>
+      <input class="form-control" id="number" name="mobileNumber" type="text" placeholder="Mobile Number" />
     </div>
 
        
@@ -186,13 +199,13 @@
     <!-- Email address input -->
     <div class="mb-3">
       <label class="form-label" for="emailAddress">Email Address</label>
-      <input class="form-control" id="emailAddress" type="email" placeholder="Email Address" />
+      <input class="form-control" id="emailAddress" name="emailAddress" type="email" placeholder="Email Address" />
     </div>
 
     <!-- Message input -->
     <div class="mb-3">
       <label class="form-label" for="message">Message</label>
-      <textarea class="form-control" id="message" type="text" placeholder="Message" style="height: 10rem;"></textarea>
+      <textarea class="form-control" id="message" name="message" type="text" placeholder="Message" style="height: 10rem;"></textarea>
     </div>
 
     <!-- Form submit button -->
@@ -227,6 +240,17 @@
       $('.js-scroll-trigger ').click(function(){
           $(".navbar-collapse").collapse('hide');
       });
+  </script>
+  <script>
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbza3Nqf0pMaCFlYaMELJ_YVoG1v0npg21-xmOtYNRimVo_c_NvCv1Rp9mh09de-AOoi/exec'
+    const form = document.forms['google-sheet']
+  
+    form.addEventListener('submit', e => {
+      e.preventDefault()
+      fetch(scriptURL, { method: 'POST', body: new FormData(form)})
+        .then(response => $("#form-alert").html("<div class='alert alert-success'>Contact message sent successfully.</div>"))
+        .catch(error =>  $("#form-alert").html("<div class='alert alert-success'>Contact message not sent.</div>"))
+    })
   </script>
 </body>
 </html>
