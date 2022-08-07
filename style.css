@@ -190,3 +190,11 @@ h1.loader {
 .loader span:nth-child(7) {
   animation-delay:0.90s;
 }
+
+html,body{
+  scroll-behavior: smooth;
+}
+
+#navigation{
+  scroll-behavior: smooth;
+}
